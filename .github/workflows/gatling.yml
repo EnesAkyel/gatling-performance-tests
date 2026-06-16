@@ -1,0 +1,54 @@
+name: Gatling Performance Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      simulation:
+        description: 'Simulation to run'
+        required: true
+        default: 'simulations.BasicSimulation'
+        type: choice
+        options:
+          - simulations.BasicSimulation
+          - simulations.LoadSimulation
+          - simulations.StressSimulation
+          - simulations.SpikeSimulation
+          - simulations.SoakSimulation
+
+permissions:
+  contents: read
+  actions: write
+  checks: write
+
+jobs:
+  gatling:
+    name: Run Gatling Simulation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Run Gatling simulation
+        run: |
+          mvn gatling:test \
+            -Dsimulation=${{ github.event.inputs.simulation || 'simulations.BasicSimulation' }}
+
+      - name: Upload Gatling report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gatling-report
+          path: target/gatling/
+          retention-days: 30
