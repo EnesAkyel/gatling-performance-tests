@@ -4,7 +4,6 @@ public class Config {
 
     // Base URLs
     public static final String BASE_URL = "https://jsonplaceholder.typicode.com";
-    public static final String SAUCE_URL = "https://www.saucedemo.com";
 
     // Load profile defaults
     public static final int DEFAULT_USERS       = 10;
