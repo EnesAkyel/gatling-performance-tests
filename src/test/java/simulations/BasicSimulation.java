@@ -23,6 +23,9 @@ public class BasicSimulation extends Simulation {
                         .injectOpen(atOnceUsers(1)),
 
                 PostScenarios.deletePost
+                        .injectOpen(atOnceUsers(1)),
+
+                PostScenarios.getAllUsers
                         .injectOpen(atOnceUsers(1))
         )
                 .protocols(PostScenarios.HTTP_PROTOCOL)

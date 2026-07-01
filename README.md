@@ -27,20 +27,20 @@ A production-grade performance testing framework built with **Gatling** and **Ja
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     Simulation Layer                         │
-│  BasicSimulation │ LoadSimulation │ StressSimulation         │
+│                     Simulation Layer                        │
+│  BasicSimulation │ LoadSimulation │ StressSimulation        │
 │  SpikeSimulation │ SoakSimulation                           │
 └───────────────────────────┬─────────────────────────────────┘
                             │
 ┌───────────────────────────▼─────────────────────────────────┐
-│                     Scenario Layer                           │
+│                     Scenario Layer                          │
 │         Reusable ScenarioBuilders (PostScenarios)           │
 │         HTTP actions, checks, pauses, flows                 │
 └───────────────────────────┬─────────────────────────────────┘
                             │
 ┌───────────────────────────▼─────────────────────────────────┐
-│                     Config Layer                             │
-│    Base URLs │ Load profiles │ Thresholds │ Assertions       │
+│                     Config Layer                            │
+│    Base URLs │ Load profiles │ Thresholds │ Assertions      │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -51,7 +51,7 @@ A production-grade performance testing framework built with **Gatling** and **Ja
 | Tool | Purpose |
 |---|---|
 | [Gatling](https://gatling.io) | Performance testing engine |
-| [Java 25](https://openjdk.org) | Primary language |
+| [Java 21](https://openjdk.org) | Primary language |
 | [Maven](https://maven.apache.org) | Build and dependency management |
 | [Gatling Maven Plugin](https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/) | Run simulations via Maven |
 | [GitHub Actions](https://github.com/features/actions) | CI/CD pipeline |
@@ -141,7 +141,7 @@ Users
 
 ### Prerequisites
 
-- Java 25+
+- Java 21+
 - Maven 3.9+
 
 ### Installation
@@ -216,13 +216,13 @@ All base URLs, thresholds, and load profile values are defined in `Config.java` 
 
 ### Threshold-based Assertions
 Every simulation defines performance thresholds:
-- Max response time < 2000ms
-- 95th percentile < 1500ms
+- Max response time < 60 000ms
+- 95th percentile < 1 500ms
 - Error rate < 1%
 
 ---
 
-## 👤 Author
+## Author
 
 **Enes Akyel**
 SDET | QA Automation Engineer

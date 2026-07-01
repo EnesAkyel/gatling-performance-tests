@@ -4,8 +4,13 @@ import config.Config;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
-import static io.gatling.javaapi.core.CoreDsl.*;
-import static io.gatling.javaapi.http.HttpDsl.*;
+import java.util.List;
+
+import static io.gatling.javaapi.core.CoreDsl.jsonPath;
+import static io.gatling.javaapi.core.CoreDsl.scenario;
+import static io.gatling.javaapi.core.CoreDsl.StringBody;
+import static io.gatling.javaapi.http.HttpDsl.http;
+import static io.gatling.javaapi.http.HttpDsl.status;
 
 public class PostScenarios {
 
@@ -21,7 +26,7 @@ public class PostScenarios {
                             .get("/posts")
                             .check(status().is(200))
                             .check(jsonPath("$[0].id").exists())
-                            .check(jsonPath("$").ofList().transform(List -> List.size()).is(100))
+                            .check(jsonPath("$").ofList().transform(List::size).is(100))
             );
 
     public static final ScenarioBuilder getSinglePost = scenario("Get Single Post")
@@ -75,6 +80,15 @@ public class PostScenarios {
                     http("DELETE /posts/1")
                             .delete("/posts/1")
                             .check(status().is(200))
+            );
+
+    public static final ScenarioBuilder getAllUsers = scenario("Get All Users")
+            .exec(
+                    http("GET /users")
+                            .get("/users")
+                            .check(status().is(200))
+                            .check(jsonPath("$[0].id").exists())
+                            .check(jsonPath("$").ofList().transform(List::size).is(10))
             );
 
     public static final ScenarioBuilder browsePostsFlow = scenario("Browse Posts Flow")
