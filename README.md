@@ -11,15 +11,15 @@ A production-grade performance testing framework built with **Gatling** and **Ja
 
 ## Table of Contents
 
-- [Framework Architecture](#-framework-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Simulation Types](#-simulation-types)
-- [Getting Started](#-getting-started)
-- [Running Simulations](#-running-simulations)
-- [Reports](#-reports)
-- [CI/CD](#-cicd)
-- [Design Patterns](#-design-patterns)
+- [Framework Architecture](#framework-architecture)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Simulation Types](#simulation-types)
+- [Getting Started](#getting-started)
+- [Running Simulations](#running-simulations)
+- [Reports](#reports)
+- [CI/CD](#cicd)
+- [Design Patterns](#design-patterns)
 
 ---
 
@@ -48,13 +48,13 @@ A production-grade performance testing framework built with **Gatling** and **Ja
 
 ## Tech Stack
 
-| Tool | Purpose |
-|---|---|
-| [Gatling](https://gatling.io) | Performance testing engine |
-| [Java 21](https://openjdk.org) | Primary language |
-| [Maven](https://maven.apache.org) | Build and dependency management |
-| [Gatling Maven Plugin](https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/) | Run simulations via Maven |
-| [GitHub Actions](https://github.com/features/actions) | CI/CD pipeline |
+| Tool                                                                                               | Purpose                         |
+|----------------------------------------------------------------------------------------------------|---------------------------------|
+| [Gatling](https://gatling.io)                                                                      | Performance testing engine      |
+| [Java 21](https://openjdk.org)                                                                     | Primary language                |
+| [Maven](https://maven.apache.org)                                                                  | Build and dependency management |
+| [Gatling Maven Plugin](https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/) | Run simulations via Maven       |
+| [GitHub Actions](https://github.com/features/actions)                                              | CI/CD pipeline                  |
 
 ---
 
