@@ -51,7 +51,7 @@ A production-grade performance testing framework built with **Gatling** and **Ja
 | Tool                                                                                               | Purpose                         |
 |----------------------------------------------------------------------------------------------------|---------------------------------|
 | [Gatling](https://gatling.io)                                                                      | Performance testing engine      |
-| [Java 21](https://openjdk.org)                                                                     | Primary language                |
+| [Java 25](https://openjdk.org)                                                                     | Primary language                |
 | [Maven](https://maven.apache.org)                                                                  | Build and dependency management |
 | [Gatling Maven Plugin](https://gatling.io/docs/gatling/reference/current/extensions/maven_plugin/) | Run simulations via Maven       |
 | [GitHub Actions](https://github.com/features/actions)                                              | CI/CD pipeline                  |
@@ -141,7 +141,7 @@ Users
 
 ### Prerequisites
 
-- Java 21+
+- Java 25+
 - Maven 3.9+
 
 ### Installation
