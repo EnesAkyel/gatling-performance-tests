@@ -142,7 +142,7 @@ Users
 ### Prerequisites
 
 - Java 25+
-- Maven 3.9+
+- Maven 3.9.16
 
 ### Installation
 
