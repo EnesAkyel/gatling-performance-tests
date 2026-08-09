@@ -1,6 +1,6 @@
 package simulations;
 
-import scenarios.PostScenarios;
+import scenarios.MovieScenarios;
 import io.gatling.javaapi.core.Simulation;
 
 import java.time.Duration;
@@ -12,7 +12,7 @@ import static io.gatling.javaapi.core.CoreDsl.global;
 public class SpikeSimulation extends Simulation {
     {
         setUp(
-                PostScenarios.browsePostsFlow
+                MovieScenarios.browseMoviesFlow
                         .injectOpen(
                                 constantUsersPerSec(5).during(Duration.ofSeconds(20)),
                                 atOnceUsers(50),
@@ -21,7 +21,7 @@ public class SpikeSimulation extends Simulation {
                                 constantUsersPerSec(5).during(Duration.ofSeconds(20))
                         )
         )
-                .protocols(PostScenarios.HTTP_PROTOCOL)
+                .protocols(MovieScenarios.HTTP_PROTOCOL)
                 .assertions(
                         global().responseTime().max().lt(20000),
                         global().successfulRequests().percent().gt(95.0)

@@ -33,6 +33,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
+      - name: Checkout movie-catalog-api
+        uses: actions/checkout@v7
+        with:
+          repository: EnesAkyel/movie-catalog-api
+          path: movie-catalog-api
+
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
@@ -40,10 +46,45 @@ jobs:
           java-version: '25'
           cache: 'maven'
 
+      - name: Build movie-catalog-api
+        run: ./mvnw package -DskipTests -q
+        working-directory: movie-catalog-api
+
+      - name: Start movie-catalog-api
+        run: |
+          cp target/movie-catalog-api-*.jar app.jar
+          docker build -f Dockerfile.ci -t movie-catalog-api .
+          rm app.jar
+          docker compose up -d
+        working-directory: movie-catalog-api
+        env:
+          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Wait for API to be ready
+        run: |
+          echo "Waiting for API..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8080/v3/api-docs > /dev/null; then
+              echo "API is ready after $((i * 5))s"
+              exit 0
+            fi
+            echo "Attempt $i/30 — retrying in 5s..."
+            sleep 5
+          done
+          echo "API did not become ready in time"
+          docker compose logs --tail=100
+          exit 1
+        working-directory: movie-catalog-api
+
       - name: Run Gatling simulation
         run: |
           mvn gatling:test \
             -Dsimulation=${{ github.event.inputs.simulation || 'simulations.BasicSimulation' }}
+        env:
+          AUTH_USERNAME: ${{ secrets.AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
 
       - name: Upload Gatling report
         uses: actions/upload-artifact@v7
