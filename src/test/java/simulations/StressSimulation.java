@@ -1,6 +1,6 @@
 package simulations;
 
-import scenarios.PostScenarios;
+import scenarios.MovieScenarios;
 import io.gatling.javaapi.core.Simulation;
 
 import java.time.Duration;
@@ -14,7 +14,7 @@ import static io.gatling.javaapi.core.CoreDsl.stressPeakUsers;
 public class StressSimulation extends Simulation {
     {
         setUp(
-                PostScenarios.browsePostsFlow
+                MovieScenarios.browseMoviesFlow
                         .injectOpen(
                                 rampUsers(5).during(Duration.ofSeconds(10)),
                                 stressPeakUsers(10).during(Duration.ofSeconds(20)),
@@ -26,7 +26,7 @@ public class StressSimulation extends Simulation {
                                 rampUsersPerSec(50).to(0).during(Duration.ofSeconds(10))
                         )
         )
-                .protocols(PostScenarios.HTTP_PROTOCOL)
+                .protocols(MovieScenarios.HTTP_PROTOCOL)
                 .assertions(
                         global().responseTime().max().lt(100000),
                         global().successfulRequests().percent().gt(95.0)

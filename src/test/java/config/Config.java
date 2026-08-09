@@ -3,7 +3,11 @@ package config;
 public class Config {
 
     // Base URLs
-    public static final String BASE_URL = "https://jsonplaceholder.typicode.com";
+    public static final String BASE_URL = System.getenv().getOrDefault("BASE_URL", "http://localhost:8080");
+
+    // Auth credentials
+    public static final String AUTH_USERNAME = System.getenv().getOrDefault("AUTH_USERNAME", "");
+    public static final String AUTH_PASSWORD = System.getenv().getOrDefault("AUTH_PASSWORD", "");
 
     // Load profile defaults
     public static final int DEFAULT_USERS       = 10;
