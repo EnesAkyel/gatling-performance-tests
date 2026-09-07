@@ -196,6 +196,18 @@ Open it in your browser to see:
 
 ---
 
+## Checking for Dependency Upgrades
+
+```bash
+# List dependencies with newer versions available
+mvn versions:display-dependency-updates
+
+# List available plugin updates
+mvn versions:display-plugin-updates
+```
+
+---
+
 ## CI/CD
 
 Simulations run automatically on every push and pull request via **GitHub Actions**:
